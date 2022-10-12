@@ -190,17 +190,17 @@ export const TradeClipboard: FunctionComponent<{
   const inAmountValue = useMemo(
     () =>
       tradeTokenInConfig.amount !== "" &&
-      new Dec(tradeTokenInConfig.amount).gt(new Dec(0))
+        new Dec(tradeTokenInConfig.amount).gt(new Dec(0))
         ? priceStore.calculatePrice(
-            new CoinPretty(
-              tradeTokenInConfig.sendCurrency,
-              new Dec(tradeTokenInConfig.amount).mul(
-                DecUtils.getTenExponentNInPrecisionRange(
-                  tradeTokenInConfig.sendCurrency.coinDecimals
-                )
+          new CoinPretty(
+            tradeTokenInConfig.sendCurrency,
+            new Dec(tradeTokenInConfig.amount).mul(
+              DecUtils.getTenExponentNInPrecisionRange(
+                tradeTokenInConfig.sendCurrency.coinDecimals
               )
             )
           )
+        )
         : undefined,
     [tradeTokenInConfig.amount, tradeTokenInConfig.sendCurrency]
   );
@@ -322,11 +322,10 @@ export const TradeClipboard: FunctionComponent<{
                 <InputBox
                   type="number"
                   className="bg-transparent px-0 w-fit"
-                  inputClassName={`bg-transparent text-center ${
-                    !slippageConfig.isManualSlippage
-                      ? "text-white-faint"
-                      : "text-white-high"
-                  }`}
+                  inputClassName={`bg-transparent text-center ${!slippageConfig.isManualSlippage
+                    ? "text-white-faint"
+                    : "text-white-high"
+                    }`}
                   style="no-border"
                   currentValue={slippageConfig.manualSlippageStr}
                   onInput={(value) => {
@@ -365,8 +364,8 @@ export const TradeClipboard: FunctionComponent<{
           style={
             isAnimatingSwitch
               ? {
-                  transform: "translateY(60px)",
-                }
+                transform: "translateY(60px)",
+              }
               : undefined
           }
         >
@@ -612,8 +611,8 @@ export const TradeClipboard: FunctionComponent<{
           style={
             isAnimatingSwitch
               ? {
-                  transform: "translateY(-53px) scaleY(1.4)",
-                }
+                transform: "translateY(-53px) scaleY(1.4)",
+              }
               : undefined
           }
         >
@@ -622,8 +621,8 @@ export const TradeClipboard: FunctionComponent<{
             style={
               isAnimatingSwitch
                 ? {
-                    transform: "scaleY(0.6)",
-                  }
+                  transform: "scaleY(0.6)",
+                }
                 : undefined
             }
           >
@@ -676,11 +675,10 @@ export const TradeClipboard: FunctionComponent<{
                     ? "text-white-full"
                     : "text-white-disabled"
                 )}
-              >{`≈ ${
-                tradeTokenInConfig.expectedSwapResult.amount.denom !== "UNKNOWN"
-                  ? swapResultAmount
-                  : "0"
-              }`}</h5>
+              >{`≈ ${tradeTokenInConfig.expectedSwapResult.amount.denom !== "UNKNOWN"
+                ? swapResultAmount
+                : "0"
+                }`}</h5>
               <div
                 className={classNames(
                   "caption text-white-disabled transition-opacity",
@@ -716,19 +714,16 @@ export const TradeClipboard: FunctionComponent<{
                 "text-white-disabled": !isEstimateDetailRelevant,
               })}
             >
-              {`1 ${
-                tradeTokenInConfig.sendCurrency.coinDenom !== "UNKNOWN"
-                  ? tradeTokenInConfig.sendCurrency.coinDenom
-                  : ""
-              } ≈ ${
-                spotPrice.toDec().lt(new Dec(1))
+              {`1 ${tradeTokenInConfig.sendCurrency.coinDenom !== "UNKNOWN"
+                ? tradeTokenInConfig.sendCurrency.coinDenom
+                : ""
+                } ≈ ${spotPrice.toDec().lt(new Dec(1))
                   ? spotPrice.toString()
                   : spotPrice.maxDecimals(6).toString()
-              } ${
-                tradeTokenInConfig.outCurrency.coinDenom !== "UNKNOWN"
+                } ${tradeTokenInConfig.outCurrency.coinDenom !== "UNKNOWN"
                   ? tradeTokenInConfig.outCurrency.coinDenom
                   : ""
-              }`}
+                }`}
             </div>
             <div className="flex items-center gap-2">
               <Image
@@ -742,9 +737,8 @@ export const TradeClipboard: FunctionComponent<{
                 width={24}
               />
               <Image
-                className={`group-hover:opacity-100 transition-all ${
-                  showEstimateDetails ? "rotate-180" : "rotate-0"
-                } ${isEstimateDetailRelevant ? "opacity-40" : "opacity-0"}`}
+                className={`group-hover:opacity-100 transition-all ${showEstimateDetails ? "rotate-180" : "rotate-0"
+                  } ${isEstimateDetailRelevant ? "opacity-40" : "opacity-0"}`}
                 alt="show estimates"
                 src="/icons/chevron-down.svg"
                 height={isMobile ? 14 : 18}
@@ -781,11 +775,10 @@ export const TradeClipboard: FunctionComponent<{
                 {tradeTokenInConfig.expectedSwapResult.swapFee.toString()})
               </div>
               <div className="caption text-wireframes-lightGrey">
-                {`≈ ${
-                  priceStore.calculatePrice(
-                    tradeTokenInConfig.expectedSwapResult.tokenInFeeAmount
-                  ) ?? "0"
-                } `}
+                {`≈ ${priceStore.calculatePrice(
+                  tradeTokenInConfig.expectedSwapResult.tokenInFeeAmount
+                ) ?? "0"
+                  } `}
               </div>
             </div>
             <hr className="text-white-faint" />
@@ -819,18 +812,17 @@ export const TradeClipboard: FunctionComponent<{
                   ).toString()}
                 </span>
                 <span>
-                  {`≈ ${
-                    priceStore.calculatePrice(
-                      new CoinPretty(
-                        tradeTokenInConfig.outCurrency,
-                        minOutAmountLessSlippage.mul(
-                          DecUtils.getTenExponentNInPrecisionRange(
-                            tradeTokenInConfig.outCurrency.coinDecimals
-                          )
+                  {`≈ ${priceStore.calculatePrice(
+                    new CoinPretty(
+                      tradeTokenInConfig.outCurrency,
+                      minOutAmountLessSlippage.mul(
+                        DecUtils.getTenExponentNInPrecisionRange(
+                          tradeTokenInConfig.outCurrency.coinDecimals
                         )
                       )
-                    ) || "0"
-                  }`}
+                    )
+                  ) || "0"
+                    }`}
                 </span>
               </div>
             </div>
@@ -852,6 +844,7 @@ export const TradeClipboard: FunctionComponent<{
         }
         loading={account.txTypeInProgress !== ""}
         onClick={async () => {
+          console.log({ t: account })
           if (account.walletStatus !== WalletStatus.Loaded) {
             return account.init();
           }
@@ -912,6 +905,7 @@ export const TradeClipboard: FunctionComponent<{
             const maxSlippage = slippageConfig.slippage.symbol("").toString();
 
             try {
+
               logEvent([
                 EventName.Swap.swapStarted,
                 {
@@ -922,8 +916,21 @@ export const TradeClipboard: FunctionComponent<{
                   isMultiHop: routes.length !== 1,
                 },
               ]);
+              console.log({
+                a: logEvent([
+                  EventName.Swap.swapStarted,
+                  {
+                    fromToken: tradeTokenInConfig.sendCurrency.coinDenom,
+                    tokenAmount: Number(tokenIn.amount),
+                    toToken: tradeTokenInConfig.outCurrency.coinDenom,
+                    isOnHome: !isInModal,
+                    isMultiHop: routes.length !== 1,
+                  },
+                ]), b: logEvent
+              })
               if (routes.length === 1) {
-                await account.osmosis.sendSwapExactAmountInMsg(
+                console.log({ account, chainStore, b: account.osmosis })
+                const res = await account.osmosis.sendSwapExactAmountInMsg(
                   routes[0].poolId,
                   tokenIn,
                   routes[0].tokenOutCurrency,
@@ -955,8 +962,9 @@ export const TradeClipboard: FunctionComponent<{
                     ]);
                   }
                 );
+                console.log({ res })
               } else {
-                await account.osmosis.sendMultihopSwapExactAmountInMsg(
+                const res2 = await account.osmosis.sendMultihopSwapExactAmountInMsg(
                   routes,
                   tokenIn,
                   maxSlippage,
@@ -986,6 +994,7 @@ export const TradeClipboard: FunctionComponent<{
                     ]);
                   }
                 );
+                console.log({ res2 })
               }
               tradeTokenInConfig.setAmount("");
               tradeTokenInConfig.setFraction(undefined);

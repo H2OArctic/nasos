@@ -6,6 +6,6 @@ dist
 prod
 build
 yarn-error.log
-
+package.json
 src/styles/index.scss
 .vercel

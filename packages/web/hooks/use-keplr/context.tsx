@@ -33,24 +33,24 @@ export async function sendTxWC(
 
   const params = isProtoTx
     ? {
-        tx_bytes: Buffer.from(tx as any).toString("base64"),
-        mode: (() => {
-          switch (mode) {
-            case "async":
-              return "BROADCAST_MODE_ASYNC";
-            case "block":
-              return "BROADCAST_MODE_BLOCK";
-            case "sync":
-              return "BROADCAST_MODE_SYNC";
-            default:
-              return "BROADCAST_MODE_UNSPECIFIED";
-          }
-        })(),
-      }
+      tx_bytes: Buffer.from(tx as any).toString("base64"),
+      mode: (() => {
+        switch (mode) {
+          case "async":
+            return "BROADCAST_MODE_ASYNC";
+          case "block":
+            return "BROADCAST_MODE_BLOCK";
+          case "sync":
+            return "BROADCAST_MODE_SYNC";
+          default:
+            return "BROADCAST_MODE_UNSPECIFIED";
+        }
+      })(),
+    }
     : {
-        tx,
-        mode: mode,
-      };
+      tx,
+      mode: mode,
+    };
 
   const result = await restInstance.post(
     isProtoTx ? "/cosmos/tx/v1beta1/txs" : "/txs",
@@ -137,9 +137,9 @@ export const GetKeplrProvider: FunctionComponent = ({ children }) => {
         url: "https://app.osmosis.zone",
         icons: wcLogoURI
           ? [
-              // Keplr mobile app can't show svg image.
-              window.location.origin + wcLogoURI,
-            ]
+            // Keplr mobile app can't show svg image.
+            window.location.origin + wcLogoURI,
+          ]
           : [],
       };
 
@@ -270,6 +270,9 @@ export const GetKeplrProvider: FunctionComponent = ({ children }) => {
       }
     });
   });
+
+  console.log({ connectionType, isExtensionSelectionModalOpen, isMobile: isMobile(), getKeplr })
+
 
   return (
     <GetKeplrContext.Provider
